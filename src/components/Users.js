@@ -11,7 +11,6 @@ function Users(props) {
 
   return (
     <div>
-      <h1>Users</h1>
       <UserForm onSaveUserData={saveUserDataHandler} />
     </div>
   )

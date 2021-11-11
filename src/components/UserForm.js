@@ -1,20 +1,29 @@
 import React, { useState } from "react";
 
-import Card from '../components/UI/Card'
-import classes from './UserForm.module.css';
+import Card from "../components/UI/Card";
+import Button from "../components/UI/Button";
+import classes from "./UserForm.module.css";
 
 function User(props) {
   const [username, setUsername] = useState("");
-  const [age, setAge] = useState();
+  const [age, setAge] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (username.trim().length === 0 || age.trim().length === 0) {
+      return;
+    }
+    if (+age < 1) {
+      return;
+    }
     const inputData = {
       username: username,
       age: age
     };
-    props.onSaveUserData(inputData)
-    console.log('User Form', inputData);
+    props.onSaveUserData(inputData);
+    setUsername("");
+    setAge("");
+    console.log("User Form", inputData);
   };
 
   const usernameHandler = (e) => {
@@ -22,10 +31,6 @@ function User(props) {
   };
 
   const ageHandler = (e) => {
-    if (e.target.value < 0) {
-      console.log('Age must be a positive number')
-      return
-    }
     setAge(e.target.value);
   };
 
@@ -44,9 +49,15 @@ function User(props) {
         </label>
         <label htmlFor="age">
           Age:
-          <input id="age" onChange={ageHandler} value={age} type="number" name="age" />
+          <input
+            id="age"
+            onChange={ageHandler}
+            value={age}
+            type="number"
+            name="age"
+          />
         </label>
-        <button type="submit">Add User</button>
+        <Button type="submit">Add User</Button>
       </form>
     </Card>
   );
