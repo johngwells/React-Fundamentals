@@ -1,16 +1,19 @@
+import classes from "./DisplayUserData.module.css";
+
+import Card from "./UI/Card";
+
 function DisplayUserData(props) {
   console.log("DisplayUsers", props);
   return (
-    <div>
-      {props.users.map((user) => {
-        return (
-          <ul>
-            <li style={{ listStyleType: 'none'}} key={user.id}>Username: {user.username}</li>
-            <li style={{ listStyleType: 'none'}}>Age: {user.age}</li>
-          </ul>
-        );
-      })}
-    </div>
+    <Card className={classes.users}>
+      {props.users.map((user) => (
+        <ul key={user.id}>
+          <li style={{ listStyleType: "none" }}>
+            Username: {user.username} is ({user.age} years old)
+          </li>
+        </ul>
+      ))}
+    </Card>
   );
 }
 
